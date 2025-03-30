@@ -110,7 +110,7 @@ const Letter = ({ letter }: Props) => {
 
       {isValid && (
         <>
-          <hr className='mb-1' />
+          <hr />
 
           <span className='text-sm'>{letterNumber}</span>
         </>
