@@ -85,7 +85,7 @@ const Letter = ({ letter }: Props) => {
   return (
     <div
       className={twMerge(
-        'p-2 rounded-md min-w-[43px] min-h-[56px] font-medium',
+        'p-1 md:p-2 rounded-md min-w-[43px] min-h-[56px] font-medium flex flex-col',
         isValid && 'border-2 border-transparent hover:border-green-300 cursor-pointer',
         editing || selectedValue === letterNumber
           ? 'border-green-600 hover:border-green-600 bg-green-100'
@@ -110,7 +110,7 @@ const Letter = ({ letter }: Props) => {
 
       {isValid && (
         <>
-          <hr />
+          <hr className='mb-1' />
 
           <span className='text-sm'>{letterNumber}</span>
         </>

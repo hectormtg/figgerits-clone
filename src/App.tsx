@@ -70,7 +70,7 @@ function App() {
     <>
       <main className='flex flex-col h-svh bg-yellow-50'>
         <section className='stamp top-shadow'>
-          <section className='flex flex-wrap text-2xl gap-x-10 gap-y-2 justify-center uppercase max-h-[40vh] overflow-auto flex-shrink-0 p-10 bg-white'>
+          <section className='flex flex-wrap text-2xl gap-x-6 gap-y-1 md:gap-x-10 md:gap-y-2 justify-center uppercase max-h-[40vh] overflow-auto flex-shrink-0 p-4 md:p-10 bg-white overflow-x-hidden'>
             {phraseWords.map((word, index) => (
               <Word
                 word={word}
@@ -80,7 +80,7 @@ function App() {
           </section>
         </section>
 
-        <section className='flex flex-col overflow-auto p-10 divide-y-2'>
+        <section className='flex flex-col overflow-auto p-4 md:p-10 divide-y-2'>
           {clues.map(clue => (
             <Clue
               clue={clue}
