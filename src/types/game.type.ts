@@ -20,3 +20,10 @@ export enum GAME_RESULT {
 }
 
 export type TypedValues = Record<number, string>
+
+export interface OnChangeParams {
+  index: number
+  inputValue: string
+  letter: string
+  letterNumber: number
+}

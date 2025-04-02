@@ -1,5 +1,5 @@
 import { Clue as ClueType } from '../types/game.type'
-import Letter from './letter'
+import Word from './word'
 
 interface Props {
   clue: ClueType
@@ -8,17 +8,18 @@ interface Props {
 const Clue = ({ clue }: Props) => {
   const { statement, answer } = clue
 
-  const answerChars = answer.split('')
+  const answerWords = answer.split(' ')
 
   return (
     <div className='flex flex-col gap-4 p-6'>
       <p>{statement}</p>
 
       <div className='flex flex-wrap text-2xl justify-center uppercase'>
-        {answerChars.map((letter, index) => (
-          <Letter
-            letter={letter}
+        {answerWords.map((word, index) => (
+          <Word
+            word={word}
             key={index}
+            index={index}
           />
         ))}
       </div>

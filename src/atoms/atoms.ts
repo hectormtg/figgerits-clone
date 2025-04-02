@@ -41,3 +41,4 @@ export const phraseValuesAtom = atom<Values>(get => {
 export const extraValuesAtom = atom<Values>({})
 export const gameResultAtom = atom<GAME_RESULT>(GAME_RESULT.DEFAULT)
 export const allLettersSet = atom(false)
+export const hoveredValueAtom = atom<number>(0)

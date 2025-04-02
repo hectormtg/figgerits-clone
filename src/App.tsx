@@ -62,7 +62,7 @@ function App() {
   if (loading)
     return (
       <main className='h-svh flex items-center justify-center'>
-        <MainLoader title='Generating content' />
+        <MainLoader title='Generando contenido' />
       </main>
     )
 

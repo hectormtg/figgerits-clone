@@ -1,4 +1,4 @@
-import { GAME_RESULT } from '@/types/game.type'
+import { GAME_RESULT, OnChangeParams } from '@/types/game.type'
 import { useAtom, useAtomValue } from 'jotai'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -6,6 +6,7 @@ import {
   extraValuesAtom,
   gameResultAtom,
   getAvailableValue,
+  hoveredValueAtom,
   phraseValuesAtom,
   selectedValueAtom,
   typedValuesAtom,
@@ -14,14 +15,18 @@ import REG_EX from '../constants/regex'
 
 interface Props {
   letter: string
+  index: number
+  onChange?: (params: OnChangeParams) => void
+  nextIndex: number | null
 }
 
-const Letter = ({ letter }: Props) => {
+const Letter = ({ letter, index, onChange, nextIndex }: Props) => {
   const [selectedValue, setSelectedValue] = useAtom(selectedValueAtom)
   const [typedValues, setTypedValues] = useAtom(typedValuesAtom)
   const values = useAtomValue(phraseValuesAtom)
   const [extraValues, setExtraValues] = useAtom(extraValuesAtom)
   const gameResult = useAtomValue(gameResultAtom)
+  const [hoveredValue, setHoveredValue] = useAtom(hoveredValueAtom)
 
   const [editing, setEditing] = useState(false)
   const [inputValue, setInputValue] = useState('')
@@ -37,7 +42,7 @@ const Letter = ({ letter }: Props) => {
   }, [])
 
   useEffect(() => {
-    setInputValue(typedValues[letterNumber])
+    setInputValue(typedValues[letterNumber] || '')
   }, [typedValues[letterNumber]])
 
   useEffect(() => {
@@ -46,6 +51,12 @@ const Letter = ({ letter }: Props) => {
       prevValue.current = ''
     }
   }, [gameResult])
+
+  useEffect(() => {
+    if (nextIndex === index && inputValue === '') {
+      handleClick()
+    }
+  }, [nextIndex])
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value.at(-1) || ''
@@ -57,6 +68,11 @@ const Letter = ({ letter }: Props) => {
         return { ...prev }
       })
       inputRef.current?.blur()
+      onChange?.({ index, letter, inputValue: value, letterNumber })
+      return
+    }
+    if (inputRef.current) {
+      inputRef.current.value = ''
     }
   }
 
@@ -82,16 +98,27 @@ const Letter = ({ letter }: Props) => {
     }
   }
 
+  function onMouseEnter() {
+    setHoveredValue(letterNumber)
+  }
+
+  function onMouseLeave() {
+    setHoveredValue(0)
+  }
+
   return (
     <div
       className={twMerge(
         'p-1 md:p-2 rounded-md min-w-[43px] min-h-[56px] font-medium flex flex-col',
-        isValid && 'border-2 border-transparent hover:border-green-300 cursor-pointer',
+        isValid && 'border-2 border-transparent cursor-pointer',
+        hoveredValue === letterNumber && 'border-green-300',
         editing || selectedValue === letterNumber
           ? 'border-green-600 hover:border-green-600 bg-green-100'
           : ''
       )}
       onClick={handleClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className='relative overflow-hidden min-h-[38px]'>
         {editing ? (

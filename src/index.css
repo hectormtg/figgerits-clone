@@ -57,6 +57,7 @@ input {
   text-transform: uppercase;
   border: none;
   outline: none;
+  padding-bottom: 6px;
 }
 
 hr {

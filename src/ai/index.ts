@@ -171,6 +171,10 @@ export async function fetchGameData(): Promise<GAME_DATA_RESPONSE> {
         role: 'user',
         parts: [{ text: "Be careful with grammar, it's important to avoid misspellings" }],
       },
+      {
+        role: 'user',
+        parts: [{ text: 'Give me the content in spanish' }],
+      },
     ],
   })
 

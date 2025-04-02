@@ -37,18 +37,18 @@ const ResultModal = ({ onClose, onClick }: Props) => {
 
   const data: DataType = {
     [GAME_RESULT.ERROR]: {
-      text: 'You have some mistakes',
+      text: 'Tienes algunos errores',
       textClassName: 'text-red-600',
       action: handleReset,
-      buttonLabel: 'Try again',
+      buttonLabel: 'Intentar de nuevo',
       animationSrc: 'https://lottie.host/c84c8acc-993d-4849-b563-469d70dc5020/57d1CtGS4u.lottie',
       buttonVariant: 'outlined',
       animationClassName: '-mt-6',
     },
     [GAME_RESULT.WIN]: {
-      text: 'You won!',
+      text: '¡Ganaste!',
       action: handleNewGame,
-      buttonLabel: 'New game',
+      buttonLabel: 'Juego nuevo',
       animationSrc: 'https://lottie.host/9ec57c45-ae1b-4e64-9e37-3420dae64f47/SJa62H2x94.lottie',
     },
     [GAME_RESULT.DEFAULT]: {},
